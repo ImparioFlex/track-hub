@@ -92,74 +92,73 @@ function HiredCard({ vendor, onTap }: { vendor: Vendor; onTap: () => void }) {
 
 /* --- Vendor Card (Thumbtack-style) --- */
 function VendorCard({ vendor, onTap }: { vendor: Vendor; onTap: () => void }) {
-  const visibleSpecialties = vendor.specialties.slice(0, 3)
+  const visibleSpecialties = vendor.specialties.slice(0, 2)
 
   return (
     <button
       onClick={onTap}
-      className="flex gap-3 w-full bg-white border border-sand-200 rounded-lg p-3.5 text-left transition-all active:scale-[0.98] hover:border-sand-300"
+      className="w-full bg-white border border-sand-200 rounded-lg p-3.5 text-left transition-all active:scale-[0.98] hover:border-sand-300 overflow-hidden"
     >
-      {/* Avatar */}
-      <img
-        src={vendor.photo}
-        alt={vendor.name}
-        className="w-14 h-14 rounded-lg object-cover flex-shrink-0 mt-0.5"
-      />
-
-      {/* Content */}
-      <div className="flex-1 min-w-0">
-        {/* Row 1: Name + category */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[16px] font-bold text-sand-950 leading-tight">{vendor.name}</span>
-          <CategoryBadge label={vendor.categoryLabel} />
-          {vendor.hired && <HiredBadge />}
+      {/* Top row: Avatar + name + badge */}
+      <div className="flex items-center gap-3">
+        <img
+          src={vendor.photo}
+          alt={vendor.name}
+          className="w-11 h-11 rounded-lg object-cover flex-shrink-0"
+        />
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="text-[15px] font-bold text-sand-950 leading-tight truncate">{vendor.name}</span>
+            {vendor.hired && <HiredBadge />}
+          </div>
+          <div className="flex items-center gap-1.5 mt-0.5 text-[12px] text-sand-600">
+            <CategoryBadge label={vendor.categoryLabel} />
+            <span className="text-sand-400">·</span>
+            <span className="truncate">{vendor.location}</span>
+            {vendor.distance && (
+              <>
+                <span className="text-sand-400">·</span>
+                <span className="flex-shrink-0">{vendor.distance}</span>
+              </>
+            )}
+          </div>
         </div>
+      </div>
 
-        {/* Row 2: Rating + location */}
-        <div className="flex items-center gap-2 mt-1 text-[13px] text-sand-600">
+      {/* Rating + Rate row */}
+      <div className="flex items-center justify-between mt-2.5">
+        <div className="flex items-center gap-1.5 text-[13px]">
           <span className="flex items-center gap-0.5 text-sand-900 font-semibold">
             <span className="text-amber-500">&#9733;</span> {vendor.rating}
           </span>
           <span className="text-sand-400">·</span>
-          <span>{vendor.reviewCount} reviews</span>
-          <span className="text-sand-400">·</span>
-          <span>{vendor.location}</span>
-          {vendor.distance && (
-            <>
-              <span className="text-sand-400">·</span>
-              <span>{vendor.distance}</span>
-            </>
-          )}
+          <span className="text-sand-600">{vendor.reviewCount} reviews</span>
         </div>
-
-        {/* Row 3: Rate */}
-        <div className="mt-1.5">
-          <span className="text-[18px] font-extrabold text-brick-700">{vendor.rate}</span>
-          <span className="text-[13px] text-sand-500 font-medium">{vendor.rateUnit}</span>
+        <div>
+          <span className="text-[17px] font-extrabold text-brick-700">{vendor.rate}</span>
+          <span className="text-[12px] text-sand-500 font-medium">{vendor.rateUnit}</span>
         </div>
+      </div>
 
-        {/* Row 4: Specialties */}
-        <div className="flex items-center gap-1 mt-1.5 flex-wrap">
+      {/* Specialties + availability */}
+      <div className="flex items-center justify-between mt-2">
+        <div className="flex items-center gap-1 overflow-hidden">
           {visibleSpecialties.map((s) => (
             <SpecialtyPill key={s} text={s} />
           ))}
-          {vendor.specialties.length > 3 && (
-            <span className="text-[11px] text-sand-500 font-medium">+{vendor.specialties.length - 3}</span>
+          {vendor.specialties.length > 2 && (
+            <span className="text-[11px] text-sand-500 font-medium flex-shrink-0">+{vendor.specialties.length - 2}</span>
           )}
         </div>
-
-        {/* Row 5: Availability / response */}
-        <div className="flex items-center gap-3 mt-1.5 text-[12px]">
+        <div className="flex items-center gap-1 text-[11px] flex-shrink-0 ml-2">
           {!vendor.available && vendor.availableDates ? (
-            <span className="text-sand-500 italic">{vendor.availableDates}</span>
+            <span className="text-sand-500">{vendor.availableDates}</span>
           ) : (
             <span className="flex items-center gap-1 text-success font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-success inline-block" />
               Available
             </span>
           )}
-          <span className="text-sand-400">·</span>
-          <span className="text-sand-600">Responds {vendor.responseTime.toLowerCase()}</span>
         </div>
       </div>
     </button>
