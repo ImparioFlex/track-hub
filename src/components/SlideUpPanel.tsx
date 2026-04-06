@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react'
+import { X } from 'lucide-react'
 
 interface SlideUpPanelProps {
   open: boolean
@@ -34,7 +35,7 @@ export function SlideUpPanel({ open, onClose, title, children, fullHeight = fals
       <div
         ref={panelRef}
         className={`
-          absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl
+          absolute bottom-0 left-0 right-0 bg-white rounded-t-xl shadow-2xl
           transform transition-transform duration-300 ease-out
           ${fullHeight ? 'top-10' : 'max-h-[85vh]'}
           flex flex-col
@@ -57,7 +58,7 @@ export function SlideUpPanel({ open, onClose, title, children, fullHeight = fals
               onClick={onClose}
               className="w-8 h-8 flex items-center justify-center rounded-full bg-sand-100 text-sand-600 hover:bg-sand-200 transition-colors"
             >
-              ✕
+              <X size={16} />
             </button>
           </div>
         )}

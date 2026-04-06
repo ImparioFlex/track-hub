@@ -1,4 +1,21 @@
 import { useState } from 'react'
+import {
+  LayoutDashboard,
+  Map,
+  Store,
+  Settings,
+  Activity,
+  CheckSquare,
+  Info,
+  BarChart3,
+  Megaphone,
+  FileDown,
+  CreditCard,
+  Shield,
+  SlidersHorizontal,
+  Phone,
+  Share2,
+} from 'lucide-react'
 import { RoleSwitcher, type Role } from './components/RoleSwitcher'
 import { BottomNav, type NavItem } from './components/BottomNav'
 import { VenueMap } from './components/VenueMap'
@@ -10,27 +27,27 @@ import { meet } from './data/meet'
 import { notifications } from './data/mapPins'
 
 const directorNav: NavItem[] = [
-  { id: 'home', label: 'Command', icon: <span>📋</span> },
-  { id: 'map', label: 'Map', icon: <span>🗺️</span> },
-  { id: 'vendors', label: 'Vendors', icon: <span>🏪</span> },
-  { id: 'more', label: 'More', icon: <span>⚙️</span> },
+  { id: 'home', label: 'Command', icon: <LayoutDashboard size={20} /> },
+  { id: 'map', label: 'Map', icon: <Map size={20} /> },
+  { id: 'vendors', label: 'Vendors', icon: <Store size={20} /> },
+  { id: 'more', label: 'More', icon: <Settings size={20} /> },
 ]
 
 const parentNav: NavItem[] = [
-  { id: 'home', label: 'My Athlete', icon: <span>🏃‍♀️</span>, badge: notifications.filter(n => !n.read).length },
-  { id: 'map', label: 'Map', icon: <span>🗺️</span> },
-  { id: 'info', label: 'Info', icon: <span>ℹ️</span> },
+  { id: 'home', label: 'My Athlete', icon: <Activity size={20} />, badge: notifications.filter(n => !n.read).length },
+  { id: 'map', label: 'Map', icon: <Map size={20} /> },
+  { id: 'info', label: 'Info', icon: <Info size={20} /> },
 ]
 
 const volunteerNav: NavItem[] = [
-  { id: 'home', label: 'My Tasks', icon: <span>✅</span> },
-  { id: 'map', label: 'Map', icon: <span>🗺️</span> },
-  { id: 'info', label: 'Info', icon: <span>ℹ️</span> },
+  { id: 'home', label: 'My Tasks', icon: <CheckSquare size={20} /> },
+  { id: 'map', label: 'Map', icon: <Map size={20} /> },
+  { id: 'info', label: 'Info', icon: <Info size={20} /> },
 ]
 
 const vendorNav: NavItem[] = [
-  { id: 'home', label: 'Marketplace', icon: <span>🏪</span> },
-  { id: 'map', label: 'Map', icon: <span>🗺️</span> },
+  { id: 'home', label: 'Marketplace', icon: <Store size={20} /> },
+  { id: 'map', label: 'Map', icon: <Map size={20} /> },
 ]
 
 function getNavForRole(role: Role): NavItem[] {
@@ -48,7 +65,7 @@ function MeetHeader({ role, onRoleChange }: { role: Role; onRoleChange: (r: Role
       <div className="px-4 pt-3 pb-2">
         <div className="flex items-center justify-between mb-2.5">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-brick-700 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-brick-700 rounded-md flex items-center justify-center">
               <span className="text-white text-sm font-black">TH</span>
             </div>
             <div>
@@ -111,26 +128,34 @@ function MapView({ role }: { role: Role }) {
   )
 }
 
+interface MoreMenuItem {
+  icon: React.ReactNode
+  label: string
+  desc: string
+}
+
 function MoreMenu() {
+  const items: MoreMenuItem[] = [
+    { icon: <BarChart3 size={20} />, label: 'Meet Statistics', desc: 'Attendance, results, and performance data' },
+    { icon: <Megaphone size={20} />, label: 'Send Announcement', desc: 'Push notification to all attendees' },
+    { icon: <FileDown size={20} />, label: 'Export Results', desc: 'Download results for Athletic.net upload' },
+    { icon: <CreditCard size={20} />, label: 'Payments', desc: 'Official and vendor payment status' },
+    { icon: <Shield size={20} />, label: 'Permissions', desc: 'Manage staff access levels' },
+    { icon: <SlidersHorizontal size={20} />, label: 'Meet Settings', desc: 'Edit meet details, schedule, rules' },
+    { icon: <Phone size={20} />, label: 'Emergency Contacts', desc: 'Quick-dial emergency numbers' },
+    { icon: <Share2 size={20} />, label: 'Share Meet Link', desc: 'QR code for parents to follow along' },
+  ]
+
   return (
     <div className="px-4 py-4">
       <h2 className="text-lg font-bold text-sand-950 mb-4">Settings & Info</h2>
       <div className="space-y-2">
-        {[
-          { icon: '📊', label: 'Meet Statistics', desc: 'Attendance, results, and performance data' },
-          { icon: '📢', label: 'Send Announcement', desc: 'Push notification to all attendees' },
-          { icon: '📋', label: 'Export Results', desc: 'Download results for Athletic.net upload' },
-          { icon: '💰', label: 'Payments', desc: 'Official and vendor payment status' },
-          { icon: '🔐', label: 'Permissions', desc: 'Manage staff access levels' },
-          { icon: '📝', label: 'Meet Settings', desc: 'Edit meet details, schedule, rules' },
-          { icon: '📞', label: 'Emergency Contacts', desc: 'Quick-dial emergency numbers' },
-          { icon: '🔗', label: 'Share Meet Link', desc: 'QR code for parents to follow along' },
-        ].map(item => (
+        {items.map(item => (
           <button
             key={item.label}
-            className="w-full flex items-center gap-3.5 p-3.5 rounded-xl bg-white border border-sand-100 hover:border-sand-200 transition-colors text-left"
+            className="w-full flex items-center gap-3.5 p-3.5 rounded-lg bg-white border border-sand-100 hover:border-sand-200 transition-colors text-left"
           >
-            <span className="text-xl">{item.icon}</span>
+            <span className="text-sand-600">{item.icon}</span>
             <div>
               <div className="text-[15px] font-semibold text-sand-950">{item.label}</div>
               <div className="text-[13px] text-sand-500">{item.desc}</div>
@@ -146,7 +171,7 @@ function InfoView() {
   return (
     <div className="px-4 py-4">
       <h2 className="text-lg font-bold text-sand-950 mb-4">Meet Information</h2>
-      <div className="bg-white rounded-2xl border border-sand-100 overflow-hidden">
+      <div className="bg-white rounded-lg border border-sand-100 overflow-hidden">
         <div className="p-4 border-b border-sand-50">
           <h3 className="font-bold text-sand-950">{meet.name}</h3>
           <p className="text-[14px] text-sand-600 mt-0.5">{meet.venue}</p>
@@ -169,7 +194,7 @@ function InfoView() {
       </div>
 
       <div className="mt-4 space-y-3">
-        <div className="bg-white rounded-2xl border border-sand-100 p-4">
+        <div className="bg-white rounded-lg border border-sand-100 p-4">
           <h3 className="font-bold text-sand-950 mb-2">Weather</h3>
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -191,7 +216,7 @@ function InfoView() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-sand-100 p-4">
+        <div className="bg-white rounded-lg border border-sand-100 p-4">
           <h3 className="font-bold text-sand-950 mb-2">Quick Numbers</h3>
           <div className="grid grid-cols-3 gap-3 text-center">
             <div>
@@ -209,7 +234,7 @@ function InfoView() {
           </div>
         </div>
 
-        <div className="bg-info-light rounded-2xl p-4">
+        <div className="bg-info-light rounded-lg p-4">
           <h3 className="font-bold text-info mb-1">Live Results</h3>
           <p className="text-[14px] text-sand-700">
             Results are posted to Athletic.net within 60 seconds of each event finishing.

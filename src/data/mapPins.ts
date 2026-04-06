@@ -5,7 +5,6 @@ export interface MapPin {
   category: 'track' | 'field' | 'facility' | 'medical' | 'parking' | 'volunteer'
   lat: number
   lng: number
-  icon: string
   color: string
 }
 
@@ -23,7 +22,6 @@ export const mapPins: MapPin[] = [
     category: 'track',
     lat: 29.8890,
     lng: -97.9380,
-    icon: '🏁',
     color: '#8b2c1a',
   },
   {
@@ -33,7 +31,6 @@ export const mapPins: MapPin[] = [
     category: 'track',
     lat: 29.8890,
     lng: -97.9395,
-    icon: '🏃',
     color: '#8b2c1a',
   },
   {
@@ -43,7 +40,6 @@ export const mapPins: MapPin[] = [
     category: 'track',
     lat: 29.8896,
     lng: -97.9393,
-    icon: '🏃',
     color: '#8b2c1a',
   },
   {
@@ -53,7 +49,6 @@ export const mapPins: MapPin[] = [
     category: 'track',
     lat: 29.8878,
     lng: -97.9388,
-    icon: '🏃',
     color: '#8b2c1a',
   },
   // Field events
@@ -64,7 +59,6 @@ export const mapPins: MapPin[] = [
     category: 'field',
     lat: 29.8893,
     lng: -97.9374,
-    icon: '🦘',
     color: '#2563eb',
   },
   {
@@ -74,7 +68,6 @@ export const mapPins: MapPin[] = [
     category: 'field',
     lat: 29.8895,
     lng: -97.9384,
-    icon: '⬆️',
     color: '#2563eb',
   },
   {
@@ -84,17 +77,15 @@ export const mapPins: MapPin[] = [
     category: 'field',
     lat: 29.8888,
     lng: -97.9396,
-    icon: '📏',
     color: '#2563eb',
   },
   {
     id: 'throws',
     label: 'Throws Area',
-    description: 'Shot put ring and discus cage — south parking lot. ⚠️ Stay behind safety line at all times.',
+    description: 'Shot put ring and discus cage — south parking lot. Stay behind safety line at all times.',
     category: 'field',
     lat: 29.8872,
     lng: -97.9390,
-    icon: '💪',
     color: '#2563eb',
   },
   // Facilities
@@ -105,7 +96,6 @@ export const mapPins: MapPin[] = [
     category: 'facility',
     lat: 29.8882,
     lng: -97.9370,
-    icon: '📋',
     color: '#15803d',
   },
   {
@@ -115,7 +105,6 @@ export const mapPins: MapPin[] = [
     category: 'facility',
     lat: 29.8889,
     lng: -97.9376,
-    icon: '🎙️',
     color: '#15803d',
   },
   {
@@ -125,7 +114,6 @@ export const mapPins: MapPin[] = [
     category: 'facility',
     lat: 29.8880,
     lng: -97.9372,
-    icon: '🍔',
     color: '#15803d',
   },
   {
@@ -135,7 +123,6 @@ export const mapPins: MapPin[] = [
     category: 'facility',
     lat: 29.8878,
     lng: -97.9374,
-    icon: '🚻',
     color: '#15803d',
   },
   {
@@ -145,7 +132,6 @@ export const mapPins: MapPin[] = [
     category: 'facility',
     lat: 29.8886,
     lng: -97.9374,
-    icon: '🏆',
     color: '#15803d',
   },
   // Medical
@@ -156,7 +142,6 @@ export const mapPins: MapPin[] = [
     category: 'medical',
     lat: 29.8888,
     lng: -97.9378,
-    icon: '🏥',
     color: '#dc2626',
   },
   {
@@ -166,7 +151,6 @@ export const mapPins: MapPin[] = [
     category: 'medical',
     lat: 29.8895,
     lng: -97.9390,
-    icon: '💧',
     color: '#dc2626',
   },
   // Parking
@@ -177,7 +161,6 @@ export const mapPins: MapPin[] = [
     category: 'parking',
     lat: 29.8876,
     lng: -97.9368,
-    icon: '🅿️',
     color: '#6b645d',
   },
   {
@@ -187,7 +170,6 @@ export const mapPins: MapPin[] = [
     category: 'parking',
     lat: 29.8870,
     lng: -97.9378,
-    icon: '🅿️',
     color: '#6b645d',
   },
 ]
@@ -196,7 +178,7 @@ export const notifications = [
   {
     id: 'n1',
     type: 'safety' as const,
-    title: '⚡ Lightning Delay',
+    title: 'Lightning Delay',
     message: 'Lightning detected 6.2 mi from venue. All outdoor activity suspended. Seek shelter in permanent structures or vehicles.',
     time: '10:42 AM',
     read: false,
@@ -212,7 +194,7 @@ export const notifications = [
   {
     id: 'n3',
     type: 'result' as const,
-    title: '🏆 Emma Rodriguez — 400m Result',
+    title: 'Emma Rodriguez — 400m Result',
     message: 'Emma finished 1st in the Girls 400m with a time of 56.42! Season best!',
     time: '9:38 AM',
     read: true,

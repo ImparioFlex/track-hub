@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { meet, events, followedAthlete, type MeetEvent } from '../data/meet'
 import { notifications } from '../data/mapPins'
 import { WeatherBanner } from '../components/WeatherBanner'
@@ -23,75 +24,65 @@ function CompletedCard({ event }: { event: MeetEvent }) {
   const pr = followedAthlete.prs[eventId as keyof typeof followedAthlete.prs]
 
   return (
-    <div className="bg-white rounded-2xl border border-sand-200 overflow-hidden">
-      <div className="flex">
-        <div className="w-1.5 bg-success flex-shrink-0" />
-        <div className="flex-1 p-4">
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[13px] font-semibold text-success uppercase tracking-wide">
-              Completed
-            </span>
-            <span className="text-[13px] text-sand-500">{event.time}</span>
-          </div>
-          {result ? (
-            <>
-              <p className="text-[20px] font-bold text-sand-950 leading-tight">
-                {result.place === 1 ? '🏆 ' : ''}
-                {event.name} — {result.place === 1 ? '1st' : result.place === 2 ? '2nd' : result.place === 3 ? '3rd' : `${result.place}th`} Place
-              </p>
-              <div className="flex items-baseline gap-3 mt-2">
-                <span className="text-[28px] font-extrabold text-sand-950 tracking-tight">
-                  {result.mark}
-                </span>
-                {pr && (
-                  <span className="text-[15px] text-sand-500">
-                    PR: {pr}
-                  </span>
-                )}
-              </div>
-            </>
-          ) : (
-            <p className="text-[18px] font-bold text-sand-950">{event.name}</p>
-          )}
-          <p className="text-[13px] text-sand-500 mt-1">{event.location}</p>
-        </div>
+    <div className="bg-white rounded-lg border border-sand-200 p-4">
+      <div className="flex items-center justify-between mb-1">
+        <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-success uppercase tracking-wide">
+          <span className="w-2 h-2 rounded-full bg-success inline-block" />
+          Completed
+        </span>
+        <span className="text-[13px] text-sand-500">{event.time}</span>
       </div>
+      {result ? (
+        <>
+          <p className="text-[20px] font-bold text-sand-950 leading-tight">
+            {event.name} — {result.place === 1 ? '1st' : result.place === 2 ? '2nd' : result.place === 3 ? '3rd' : `${result.place}th`} Place
+          </p>
+          <div className="flex items-baseline gap-3 mt-2">
+            <span className="text-[28px] font-extrabold text-sand-950 tracking-tight">
+              {result.mark}
+            </span>
+            {pr && (
+              <span className="text-[15px] text-sand-500">
+                PR: {pr}
+              </span>
+            )}
+          </div>
+        </>
+      ) : (
+        <p className="text-[18px] font-bold text-sand-950">{event.name}</p>
+      )}
+      <p className="text-[13px] text-sand-500 mt-1">{event.location}</p>
     </div>
   )
 }
 
 function DelayedCard({ event }: { event: MeetEvent }) {
   return (
-    <div className="bg-warning-light rounded-2xl border border-amber-200 overflow-hidden">
-      <div className="flex">
-        <div className="w-1.5 bg-warning flex-shrink-0" />
-        <div className="flex-1 p-4">
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[13px] font-semibold text-warning uppercase tracking-wide">
-              Delayed
+    <div className="bg-amber-50/50 rounded-lg border border-amber-200 p-4">
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-[13px] font-semibold text-warning uppercase tracking-wide">
+          Delayed
+        </span>
+        <span className="text-[13px] text-sand-600">
+          <span className="line-through">{event.time}</span>
+          {event.estimatedTime && (
+            <span className="ml-2 font-semibold text-warning">
+              {event.estimatedTime}
             </span>
-            <span className="text-[13px] text-sand-600">
-              <span className="line-through">{event.time}</span>
-              {event.estimatedTime && (
-                <span className="ml-2 font-semibold text-warning">
-                  → {event.estimatedTime}
-                </span>
-              )}
-            </span>
-          </div>
-          <p className="text-[20px] font-bold text-sand-950 leading-tight">
-            {event.name}
-          </p>
-          <p className="text-[15px] text-sand-700 mt-1.5">
-            {event.notes || 'Weather delay'}
-          </p>
-          <div className="flex items-center gap-2 mt-3 bg-white/60 rounded-lg px-3 py-2">
-            <div className="w-2 h-2 rounded-full bg-warning animate-pulse flex-shrink-0" />
-            <span className="text-[14px] text-sand-700">
-              We'll notify you 10 min before Emma's event starts
-            </span>
-          </div>
-        </div>
+          )}
+        </span>
+      </div>
+      <p className="text-[20px] font-bold text-sand-950 leading-tight">
+        {event.name}
+      </p>
+      <p className="text-[15px] text-sand-700 mt-1.5">
+        {event.notes || 'Weather delay'}
+      </p>
+      <div className="flex items-center gap-2 mt-3 bg-white/60 rounded-md px-3 py-2">
+        <div className="w-2 h-2 rounded-full bg-warning animate-pulse flex-shrink-0" />
+        <span className="text-[14px] text-sand-700">
+          We'll notify you 10 min before Emma's event starts
+        </span>
       </div>
     </div>
   )
@@ -102,25 +93,20 @@ function UpcomingCard({ event }: { event: MeetEvent }) {
   const pr = followedAthlete.prs[eventId as keyof typeof followedAthlete.prs]
 
   return (
-    <div className="bg-white rounded-2xl border border-sand-200 overflow-hidden">
-      <div className="flex">
-        <div className="w-1.5 bg-sand-300 flex-shrink-0" />
-        <div className="flex-1 p-4">
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[13px] font-semibold text-sand-500 uppercase tracking-wide">
-              Coming Up
-            </span>
-            <span className="text-[13px] text-sand-500">{event.time}</span>
-          </div>
-          <p className="text-[20px] font-bold text-sand-950 leading-tight">
-            {event.name}
-          </p>
-          {pr && (
-            <p className="text-[15px] text-sand-500 mt-1">PR: {pr}</p>
-          )}
-          <p className="text-[13px] text-sand-500 mt-1">{event.location}</p>
-        </div>
+    <div className="bg-white rounded-lg border border-sand-200 p-4">
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-[13px] font-semibold text-sand-500 uppercase tracking-wide">
+          Coming Up
+        </span>
+        <span className="text-[13px] text-sand-500">{event.time}</span>
       </div>
+      <p className="text-[20px] font-bold text-sand-950 leading-tight">
+        {event.name}
+      </p>
+      {pr && (
+        <p className="text-[15px] text-sand-500 mt-1">PR: {pr}</p>
+      )}
+      <p className="text-[13px] text-sand-500 mt-1">{event.location}</p>
     </div>
   )
 }
@@ -134,7 +120,7 @@ function NotificationItem({ notification }: { notification: typeof notifications
   }
 
   return (
-    <div className={`rounded-xl border p-3.5 ${bgMap[notification.type]} relative`}>
+    <div className={`rounded-lg border p-3.5 ${bgMap[notification.type]} relative`}>
       {!notification.read && (
         <div className="absolute top-3.5 right-3.5 w-2.5 h-2.5 rounded-full bg-info" />
       )}
@@ -209,7 +195,7 @@ export function ParentView() {
           </div>
 
           {/* PR / Season Best Mini Table */}
-          <div className="mt-4 bg-sand-50 rounded-xl border border-sand-200 overflow-hidden">
+          <div className="mt-4 bg-sand-50 rounded-lg border border-sand-200 overflow-hidden">
             <div className="grid grid-cols-4 text-[11px] font-bold text-sand-500 uppercase tracking-wider px-3 py-2 border-b border-sand-200 bg-sand-100">
               <span>Event</span>
               <span className="text-center">PR</span>
@@ -287,17 +273,15 @@ export function ParentView() {
       <div className="px-4 mt-8">
         <button
           onClick={() => setMeetInfoOpen(!meetInfoOpen)}
-          className="w-full bg-white rounded-2xl border border-sand-200 p-4 text-left transition-all active:scale-[0.98]"
+          className="w-full bg-white rounded-lg border border-sand-200 p-4 text-left transition-all active:scale-[0.98]"
         >
           <div className="flex items-center justify-between">
             <h2 className="text-[18px] font-bold text-sand-950">Meet Info</h2>
-            <span
-              className={`text-sand-400 text-[18px] transition-transform duration-200 ${
+            <ChevronDown
+              className={`w-5 h-5 text-sand-400 transition-transform duration-200 ${
                 meetInfoOpen ? 'rotate-180' : ''
               }`}
-            >
-              ▾
-            </span>
+            />
           </div>
 
           {meetInfoOpen && (
@@ -330,7 +314,7 @@ export function ParentView() {
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-3">
-                <div className="bg-sand-50 rounded-lg p-2.5">
+                <div className="bg-sand-50 rounded-md p-2.5">
                   <p className="text-[11px] font-bold text-sand-500 uppercase tracking-wider">
                     Gates
                   </p>
@@ -338,7 +322,7 @@ export function ParentView() {
                     {meet.gatesOpen}
                   </p>
                 </div>
-                <div className="bg-sand-50 rounded-lg p-2.5">
+                <div className="bg-sand-50 rounded-md p-2.5">
                   <p className="text-[11px] font-bold text-sand-500 uppercase tracking-wider">
                     First Event
                   </p>
@@ -346,7 +330,7 @@ export function ParentView() {
                     {meet.firstEvent}
                   </p>
                 </div>
-                <div className="bg-sand-50 rounded-lg p-2.5">
+                <div className="bg-sand-50 rounded-md p-2.5">
                   <p className="text-[11px] font-bold text-sand-500 uppercase tracking-wider">
                     Last Event
                   </p>
@@ -355,7 +339,7 @@ export function ParentView() {
                   </p>
                 </div>
               </div>
-              <button className="w-full mt-2 py-3 rounded-xl bg-brick-700 text-white text-[15px] font-bold active:bg-brick-800 transition-colors">
+              <button className="w-full mt-2 py-3 rounded-lg bg-brick-700 text-white text-[15px] font-bold active:bg-brick-800 transition-colors">
                 View Venue Map
               </button>
             </div>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { meet, events, type MeetEvent } from '../data/meet'
 import { staff, volunteers, type StaffMember, type Volunteer } from '../data/staff'
 import { checklist, type ChecklistItem, type ChecklistPhase } from '../data/checklist'
@@ -39,8 +40,8 @@ function statusLabel(status: MeetEvent['status']) {
 
 function priorityBadge(priority: ChecklistItem['priority']) {
   switch (priority) {
-    case 'critical': return <span className="text-[11px] font-bold uppercase tracking-wider text-danger bg-danger-light px-1.5 py-0.5 rounded">Critical</span>
-    case 'high': return <span className="text-[11px] font-bold uppercase tracking-wider text-warning bg-warning-light px-1.5 py-0.5 rounded">High</span>
+    case 'critical': return <span className="text-[11px] font-bold uppercase tracking-wider text-danger bg-danger-light px-1.5 py-0.5 rounded-sm">Critical</span>
+    case 'high': return <span className="text-[11px] font-bold uppercase tracking-wider text-warning bg-warning-light px-1.5 py-0.5 rounded-sm">High</span>
     case 'normal': return null
   }
 }
@@ -110,7 +111,7 @@ export function DirectorView() {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`
-                flex-1 py-2 px-3 rounded-lg text-[13px] font-semibold tracking-wide transition-all
+                flex-1 py-2 px-3 rounded-md text-[13px] font-semibold tracking-wide transition-all
                 ${activeTab === tab.id
                   ? 'bg-brick-700 text-white shadow-sm'
                   : 'text-sand-500 hover:text-sand-700 hover:bg-sand-50'
@@ -142,15 +143,15 @@ function DashboardTab() {
       {/* Meet Stats Header */}
       <div className="px-4 pt-4 pb-3">
         <div className="grid grid-cols-3 gap-3">
-          <div className="bg-sand-50 rounded-xl p-3 text-center">
+          <div className="bg-sand-50 rounded-lg p-3 text-center">
             <div className="text-[22px] font-bold text-sand-950">{meet.teamCount}</div>
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider">Teams</div>
           </div>
-          <div className="bg-sand-50 rounded-xl p-3 text-center">
+          <div className="bg-sand-50 rounded-lg p-3 text-center">
             <div className="text-[22px] font-bold text-sand-950">{meet.athleteCount}</div>
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider">Athletes</div>
           </div>
-          <div className="bg-sand-50 rounded-xl p-3 text-center">
+          <div className="bg-sand-50 rounded-lg p-3 text-center">
             <div className="text-[22px] font-bold text-sand-950">{meet.eventCount}</div>
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider">Events</div>
           </div>
@@ -162,7 +163,7 @@ function DashboardTab() {
 
       {/* Live Progress */}
       <div className="mx-4 mb-4">
-        <div className="bg-sand-50 rounded-xl p-4">
+        <div className="bg-sand-50 rounded-lg p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[13px] font-bold text-sand-950 uppercase tracking-wider">Event Progress</span>
             <span className="text-[14px] font-semibold text-sand-700">
@@ -197,7 +198,7 @@ function DashboardTab() {
         <h3 className="text-[13px] font-bold text-sand-950 uppercase tracking-wider mb-2.5 px-1">Next Up</h3>
         <div className="space-y-2">
           {nextUpEvents.map(ev => (
-            <div key={ev.id} className="flex items-center gap-3 bg-white border border-sand-100 rounded-xl p-3">
+            <div key={ev.id} className="flex items-center gap-3 bg-white border border-sand-100 rounded-lg p-3">
               {ev.status === 'in-progress' && (
                 <div className="w-2.5 h-2.5 rounded-full bg-info animate-pulse flex-shrink-0" />
               )}
@@ -220,7 +221,7 @@ function DashboardTab() {
                 ) : (
                   <div className="text-[13px] font-semibold text-sand-700">{ev.time}</div>
                 )}
-                <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded mt-0.5 inline-block ${statusColor(ev.status)}`}>
+                <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-sm mt-0.5 inline-block ${statusColor(ev.status)}`}>
                   {statusLabel(ev.status)}
                 </span>
               </div>
@@ -234,7 +235,7 @@ function DashboardTab() {
         <h3 className="text-[13px] font-bold text-sand-950 uppercase tracking-wider mb-2.5 px-1">Needs Attention</h3>
         <div className="space-y-2">
           {/* Derek Mitchell */}
-          <div className="bg-danger-light border border-red-200 rounded-xl p-3.5">
+          <div className="bg-danger-light border border-red-200 rounded-lg p-3.5">
             <div className="flex items-start gap-2.5">
               <div className="w-2.5 h-2.5 rounded-full bg-danger mt-1.5 flex-shrink-0" />
               <div>
@@ -245,7 +246,7 @@ function DashboardTab() {
           </div>
 
           {/* Lisa Park */}
-          <div className="bg-warning-light border border-amber-200 rounded-xl p-3.5">
+          <div className="bg-warning-light border border-amber-200 rounded-lg p-3.5">
             <div className="flex items-start gap-2.5">
               <div className="w-2.5 h-2.5 rounded-full bg-warning mt-1.5 flex-shrink-0" />
               <div>
@@ -256,7 +257,7 @@ function DashboardTab() {
           </div>
 
           {/* Weather Delay */}
-          <div className="bg-warning-light border border-amber-200 rounded-xl p-3.5">
+          <div className="bg-warning-light border border-amber-200 rounded-lg p-3.5">
             <div className="flex items-start gap-2.5">
               <div className="w-2.5 h-2.5 rounded-full bg-warning mt-1.5 flex-shrink-0" />
               <div>
@@ -272,7 +273,7 @@ function DashboardTab() {
       <div className="mx-4 mb-4">
         <h3 className="text-[13px] font-bold text-sand-950 uppercase tracking-wider mb-2.5 px-1">Quick Stats</h3>
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-sand-50 rounded-xl p-3.5">
+          <div className="bg-sand-50 rounded-lg p-3.5">
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-1">Volunteers</div>
             <div className="text-[20px] font-bold text-sand-950">{volunteersCheckedIn}/{volunteers.length}</div>
             <div className="w-full h-1.5 bg-sand-200 rounded-full mt-1.5 overflow-hidden">
@@ -282,7 +283,7 @@ function DashboardTab() {
               />
             </div>
           </div>
-          <div className="bg-sand-50 rounded-xl p-3.5">
+          <div className="bg-sand-50 rounded-lg p-3.5">
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-1">Staff</div>
             <div className="text-[20px] font-bold text-sand-950">{staffCheckedIn}/{staff.length}</div>
             <div className="w-full h-1.5 bg-sand-200 rounded-full mt-1.5 overflow-hidden">
@@ -292,12 +293,12 @@ function DashboardTab() {
               />
             </div>
           </div>
-          <div className="bg-sand-50 rounded-xl p-3.5">
+          <div className="bg-sand-50 rounded-lg p-3.5">
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-1">Completed</div>
             <div className="text-[20px] font-bold text-sand-950">{completedEvents.length}</div>
             <div className="text-[12px] text-sand-500 mt-0.5">events finished</div>
           </div>
-          <div className="bg-sand-50 rounded-xl p-3.5">
+          <div className="bg-sand-50 rounded-lg p-3.5">
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-1">Delayed</div>
             <div className="text-[20px] font-bold text-warning">{delayedEvents.length}</div>
             <div className="text-[12px] text-sand-500 mt-0.5">weather hold</div>
@@ -362,7 +363,7 @@ function ChecklistTab() {
           const isExpanded = expandedPhases.has(phase.key)
 
           return (
-            <div key={phase.key} className="rounded-xl border border-sand-100 overflow-hidden">
+            <div key={phase.key} className="rounded-lg border border-sand-100 overflow-hidden">
               {/* Phase Header */}
               <button
                 onClick={() => togglePhase(phase.key)}
@@ -377,9 +378,7 @@ function ChecklistTab() {
                     {allDone && ' \u2713'}
                   </div>
                 </div>
-                <div className={`text-sand-400 transition-transform duration-200 text-[14px] ${isExpanded ? 'rotate-180' : ''}`}>
-                  &#9662;
-                </div>
+                <ChevronDown className={`w-4 h-4 text-sand-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
               </button>
 
               {/* Phase Items */}
@@ -433,9 +432,7 @@ function ChecklistTab() {
                           </div>
 
                           {/* Expand indicator */}
-                          <div className={`text-sand-300 transition-transform duration-200 text-[12px] mt-1 ${isItemExpanded ? 'rotate-180' : ''}`}>
-                            &#9662;
-                          </div>
+                          <ChevronDown className={`w-3.5 h-3.5 text-sand-300 transition-transform duration-200 mt-1 ${isItemExpanded ? 'rotate-180' : ''}`} />
                         </button>
 
                         {/* Expanded Content */}
@@ -446,7 +443,7 @@ function ChecklistTab() {
 
                             {/* Warning */}
                             {item.warning && (
-                              <div className="bg-warning-light border border-amber-200 rounded-lg p-3">
+                              <div className="bg-warning-light border border-amber-200 rounded-md p-3">
                                 <div className="text-[11px] font-bold text-warning uppercase tracking-wider mb-1">Warning</div>
                                 <p className="text-[13px] text-sand-800 leading-relaxed">{item.warning}</p>
                               </div>
@@ -454,7 +451,7 @@ function ChecklistTab() {
 
                             {/* Tip */}
                             {item.tip && (
-                              <div className="bg-info-light border border-blue-200 rounded-lg p-3">
+                              <div className="bg-info-light border border-blue-200 rounded-md p-3">
                                 <div className="text-[11px] font-bold text-info uppercase tracking-wider mb-1">Tip</div>
                                 <p className="text-[13px] text-sand-800 leading-relaxed">{item.tip}</p>
                               </div>
@@ -489,14 +486,14 @@ function TeamTab() {
       {/* Summary Bar */}
       <div className="px-4 pt-4 pb-3">
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-sand-50 rounded-xl p-3.5">
+          <div className="bg-sand-50 rounded-lg p-3.5">
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-1">Staff Checked In</div>
             <div className="text-[20px] font-bold text-sand-950">{staffCheckedIn}/{staff.length}</div>
             <div className="w-full h-1.5 bg-sand-200 rounded-full mt-1.5 overflow-hidden">
               <div className="h-full bg-success rounded-full" style={{ width: `${(staffCheckedIn / staff.length) * 100}%` }} />
             </div>
           </div>
-          <div className="bg-sand-50 rounded-xl p-3.5">
+          <div className="bg-sand-50 rounded-lg p-3.5">
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-1">Volunteers</div>
             <div className="text-[20px] font-bold text-sand-950">{volunteersCheckedIn}/{volunteers.length}</div>
             <div className="w-full h-1.5 bg-sand-200 rounded-full mt-1.5 overflow-hidden">
@@ -514,7 +511,7 @@ function TeamTab() {
             <button
               key={s.id}
               onClick={() => setSelectedPerson({ type: 'staff', data: s })}
-              className={`w-full flex items-center gap-3 rounded-xl p-3 text-left transition-colors ${
+              className={`w-full flex items-center gap-3 rounded-lg p-3 text-left transition-colors ${
                 !s.checkedIn ? 'bg-warning-light border border-amber-200' : 'bg-white border border-sand-100'
               }`}
             >
@@ -524,7 +521,7 @@ function TeamTab() {
               <div className="flex-1 min-w-0">
                 <div className="text-[14px] font-semibold text-sand-950 truncate">{s.name}</div>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-[12px] font-medium text-brick-700 bg-brick-50 px-1.5 py-0.5 rounded">{s.roleLabel}</span>
+                  <span className="text-[12px] font-medium text-brick-700 bg-brick-50 px-1.5 py-0.5 rounded-sm">{s.roleLabel}</span>
                   {s.certification && <span className="text-[11px] text-sand-500">{s.certification}</span>}
                 </div>
               </div>
@@ -556,7 +553,7 @@ function TeamTab() {
                     <button
                       key={v.id}
                       onClick={() => setSelectedPerson({ type: 'volunteer', data: v })}
-                      className={`w-full flex items-center gap-3 rounded-xl p-3 text-left transition-colors ${
+                      className={`w-full flex items-center gap-3 rounded-lg p-3 text-left transition-colors ${
                         isDerekMitchell
                           ? 'bg-danger-light border border-red-200'
                           : late
@@ -619,26 +616,26 @@ function StaffDetailPanel({ person }: { person: StaffMember }) {
     <div className="px-5 py-4 space-y-4">
       {/* Role & Status */}
       <div className="flex items-center gap-2.5">
-        <span className="text-[13px] font-semibold text-brick-700 bg-brick-50 px-2 py-1 rounded-lg">{person.roleLabel}</span>
+        <span className="text-[13px] font-semibold text-brick-700 bg-brick-50 px-2 py-1 rounded-md">{person.roleLabel}</span>
         {person.checkedIn ? (
-          <span className="text-[13px] font-semibold text-success bg-success-light px-2 py-1 rounded-lg">Checked in {person.checkedInTime}</span>
+          <span className="text-[13px] font-semibold text-success bg-success-light px-2 py-1 rounded-md">Checked in {person.checkedInTime}</span>
         ) : (
-          <span className="text-[13px] font-semibold text-danger bg-danger-light px-2 py-1 rounded-lg">Not checked in</span>
+          <span className="text-[13px] font-semibold text-danger bg-danger-light px-2 py-1 rounded-md">Not checked in</span>
         )}
       </div>
 
       {/* Contact */}
       <div className="space-y-2.5">
-        <div className="flex items-center gap-3 bg-sand-50 rounded-xl p-3.5">
+        <div className="flex items-center gap-3 bg-sand-50 rounded-lg p-3.5">
           <div className="text-[14px] text-sand-500 flex-shrink-0 w-14 font-medium">Phone</div>
           <a href={`tel:${person.phone}`} className="text-[15px] font-semibold text-brick-700">{person.phone}</a>
         </div>
-        <div className="flex items-center gap-3 bg-sand-50 rounded-xl p-3.5">
+        <div className="flex items-center gap-3 bg-sand-50 rounded-lg p-3.5">
           <div className="text-[14px] text-sand-500 flex-shrink-0 w-14 font-medium">Email</div>
           <a href={`mailto:${person.email}`} className="text-[14px] font-semibold text-brick-700 break-all">{person.email}</a>
         </div>
         {person.certification && (
-          <div className="flex items-center gap-3 bg-sand-50 rounded-xl p-3.5">
+          <div className="flex items-center gap-3 bg-sand-50 rounded-lg p-3.5">
             <div className="text-[14px] text-sand-500 flex-shrink-0 w-14 font-medium">Cert</div>
             <span className="text-[14px] font-semibold text-sand-950">{person.certification}</span>
           </div>
@@ -647,7 +644,7 @@ function StaffDetailPanel({ person }: { person: StaffMember }) {
 
       {/* Notes */}
       {person.notes && (
-        <div className="bg-sand-50 rounded-xl p-3.5">
+        <div className="bg-sand-50 rounded-lg p-3.5">
           <div className="text-[12px] font-bold text-sand-500 uppercase tracking-wider mb-1">Notes</div>
           <p className="text-[14px] text-sand-800 leading-relaxed">{person.notes}</p>
         </div>
@@ -662,43 +659,43 @@ function VolunteerDetailPanel({ person }: { person: Volunteer }) {
     <div className="px-5 py-4 space-y-4">
       {/* Role & Status */}
       <div className="flex items-center gap-2.5 flex-wrap">
-        <span className="text-[13px] font-semibold text-brick-700 bg-brick-50 px-2 py-1 rounded-lg">{person.roleLabel}</span>
+        <span className="text-[13px] font-semibold text-brick-700 bg-brick-50 px-2 py-1 rounded-md">{person.roleLabel}</span>
         {person.checkedIn ? (
-          <span className="text-[13px] font-semibold text-success bg-success-light px-2 py-1 rounded-lg">Checked in {person.checkedInTime}</span>
+          <span className="text-[13px] font-semibold text-success bg-success-light px-2 py-1 rounded-md">Checked in {person.checkedInTime}</span>
         ) : isDerekMitchell ? (
-          <span className="text-[13px] font-semibold text-danger bg-danger-light px-2 py-1 rounded-lg">20 min late — no response</span>
+          <span className="text-[13px] font-semibold text-danger bg-danger-light px-2 py-1 rounded-md">20 min late — no response</span>
         ) : (
-          <span className="text-[13px] font-semibold text-sand-600 bg-sand-100 px-2 py-1 rounded-lg">Not checked in</span>
+          <span className="text-[13px] font-semibold text-sand-600 bg-sand-100 px-2 py-1 rounded-md">Not checked in</span>
         )}
       </div>
 
       {/* Shift Info */}
       <div className="grid grid-cols-2 gap-2.5">
-        <div className="bg-sand-50 rounded-xl p-3.5">
+        <div className="bg-sand-50 rounded-lg p-3.5">
           <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-0.5">Shift Start</div>
           <div className="text-[16px] font-bold text-sand-950">{person.shiftStart}</div>
         </div>
-        <div className="bg-sand-50 rounded-xl p-3.5">
+        <div className="bg-sand-50 rounded-lg p-3.5">
           <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-0.5">Shift End</div>
           <div className="text-[16px] font-bold text-sand-950">{person.shiftEnd}</div>
         </div>
       </div>
 
       {/* Location */}
-      <div className="bg-sand-50 rounded-xl p-3.5">
+      <div className="bg-sand-50 rounded-lg p-3.5">
         <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-0.5">Location</div>
         <div className="text-[15px] font-semibold text-sand-950">{person.location}</div>
       </div>
 
       {/* Contact */}
-      <div className="flex items-center gap-3 bg-sand-50 rounded-xl p-3.5">
+      <div className="flex items-center gap-3 bg-sand-50 rounded-lg p-3.5">
         <div className="text-[14px] text-sand-500 flex-shrink-0 w-14 font-medium">Phone</div>
         <a href={`tel:${person.phone}`} className="text-[15px] font-semibold text-brick-700">{person.phone}</a>
       </div>
 
       {/* Notes */}
       {person.notes && (
-        <div className={`rounded-xl p-3.5 ${isDerekMitchell ? 'bg-danger-light border border-red-200' : 'bg-sand-50'}`}>
+        <div className={`rounded-lg p-3.5 ${isDerekMitchell ? 'bg-danger-light border border-red-200' : 'bg-sand-50'}`}>
           <div className="text-[12px] font-bold text-sand-500 uppercase tracking-wider mb-1">Notes</div>
           <p className={`text-[14px] leading-relaxed ${isDerekMitchell ? 'text-danger font-semibold' : 'text-sand-800'}`}>{person.notes}</p>
         </div>
@@ -753,7 +750,7 @@ function ScheduleTab() {
                   <button
                     key={ev.id}
                     onClick={() => setSelectedEvent(ev)}
-                    className={`w-full text-left rounded-xl p-3.5 transition-colors ${
+                    className={`w-full text-left rounded-lg p-3.5 transition-colors ${
                       ev.status === 'delayed'
                         ? 'bg-warning-light border border-amber-200'
                         : ev.status === 'in-progress'
@@ -786,7 +783,7 @@ function ScheduleTab() {
                           <span className={`text-[14px] font-semibold ${ev.status === 'completed' ? 'text-sand-600' : 'text-sand-950'}`}>
                             {ev.name}
                           </span>
-                          <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${statusColor(ev.status)}`}>
+                          <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm ${statusColor(ev.status)}`}>
                             {statusLabel(ev.status)}
                           </span>
                         </div>
@@ -854,17 +851,17 @@ function EventDetailPanel({ event }: { event: MeetEvent }) {
     <div className="px-5 py-4 space-y-4">
       {/* Status + Type Badge */}
       <div className="flex items-center gap-2.5">
-        <span className={`text-[12px] font-bold uppercase tracking-wider px-2 py-1 rounded-lg ${statusColor(event.status)}`}>
+        <span className={`text-[12px] font-bold uppercase tracking-wider px-2 py-1 rounded-md ${statusColor(event.status)}`}>
           {statusLabel(event.status)}
         </span>
-        <span className="text-[12px] font-semibold text-sand-600 bg-sand-100 px-2 py-1 rounded-lg uppercase">
+        <span className="text-[12px] font-semibold text-sand-600 bg-sand-100 px-2 py-1 rounded-md uppercase">
           {event.type}
         </span>
       </div>
 
       {/* Details Grid */}
       <div className="grid grid-cols-2 gap-2.5">
-        <div className="bg-sand-50 rounded-xl p-3.5">
+        <div className="bg-sand-50 rounded-lg p-3.5">
           <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-0.5">
             {event.status === 'delayed' ? 'Original Time' : 'Time'}
           </div>
@@ -873,13 +870,13 @@ function EventDetailPanel({ event }: { event: MeetEvent }) {
           </div>
         </div>
         {event.status === 'delayed' && event.estimatedTime && (
-          <div className="bg-warning-light rounded-xl p-3.5">
+          <div className="bg-warning-light rounded-lg p-3.5">
             <div className="text-[12px] font-medium text-warning uppercase tracking-wider mb-0.5">Est. Resume</div>
             <div className="text-[16px] font-bold text-warning">{event.estimatedTime}</div>
           </div>
         )}
         {event.status !== 'delayed' && (
-          <div className="bg-sand-50 rounded-xl p-3.5">
+          <div className="bg-sand-50 rounded-lg p-3.5">
             <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-0.5">Type</div>
             <div className="text-[16px] font-bold text-sand-950 capitalize">{event.type} Event</div>
           </div>
@@ -887,14 +884,14 @@ function EventDetailPanel({ event }: { event: MeetEvent }) {
       </div>
 
       {/* Location */}
-      <div className="bg-sand-50 rounded-xl p-3.5">
+      <div className="bg-sand-50 rounded-lg p-3.5">
         <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-0.5">Location</div>
         <div className="text-[15px] font-semibold text-sand-950">{event.location}</div>
       </div>
 
       {/* Heats */}
       {event.heatCount && (
-        <div className="bg-sand-50 rounded-xl p-3.5">
+        <div className="bg-sand-50 rounded-lg p-3.5">
           <div className="text-[12px] font-medium text-sand-500 uppercase tracking-wider mb-0.5">Heats</div>
           <div className="text-[15px] font-semibold text-sand-950">
             {event.currentHeat ? `Heat ${event.currentHeat} of ${event.heatCount}` : `${event.heatCount} heat${event.heatCount > 1 ? 's' : ''}`}
@@ -904,7 +901,7 @@ function EventDetailPanel({ event }: { event: MeetEvent }) {
 
       {/* Notes */}
       {event.notes && (
-        <div className={`rounded-xl p-3.5 ${event.status === 'delayed' ? 'bg-warning-light border border-amber-200' : 'bg-sand-50'}`}>
+        <div className={`rounded-lg p-3.5 ${event.status === 'delayed' ? 'bg-warning-light border border-amber-200' : 'bg-sand-50'}`}>
           <div className="text-[12px] font-bold text-sand-500 uppercase tracking-wider mb-1">Notes</div>
           <p className={`text-[14px] leading-relaxed ${event.status === 'delayed' ? 'text-warning font-medium' : 'text-sand-800'}`}>{event.notes}</p>
         </div>
@@ -918,7 +915,7 @@ function EventDetailPanel({ event }: { event: MeetEvent }) {
             {event.results.map(r => (
               <div
                 key={r.place}
-                className={`flex items-center gap-3 rounded-xl p-3 ${
+                className={`flex items-center gap-3 rounded-lg p-3 ${
                   r.place === 1 ? 'bg-brick-50 border border-brick-100' : 'bg-sand-50'
                 }`}
               >

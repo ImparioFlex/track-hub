@@ -31,10 +31,6 @@ export interface Vendor {
   hired?: boolean
 }
 
-// Generate consistent avatar URLs using UI Avatars
-const avatar = (name: string) =>
-  `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=200&background=8b2c1a&color=fff&bold=true`
-
 export const vendors: Vendor[] = [
   // Announcers
   {
@@ -42,7 +38,7 @@ export const vendors: Vendor[] = [
     name: 'Marcus Washington',
     category: 'announcer',
     categoryLabel: 'Announcer',
-    photo: avatar('Marcus Washington'),
+    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
     location: 'Houston, TX',
     distance: '165 mi',
     rating: 4.9,
@@ -68,7 +64,7 @@ export const vendors: Vendor[] = [
     name: 'Jennifer Chen',
     category: 'announcer',
     categoryLabel: 'Announcer',
-    photo: avatar('Jennifer Chen'),
+    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
     location: 'Austin, TX',
     distance: '32 mi',
     rating: 4.7,
@@ -92,7 +88,7 @@ export const vendors: Vendor[] = [
     name: 'David "Big Dave" Thompson',
     category: 'announcer',
     categoryLabel: 'Announcer',
-    photo: avatar('David Thompson'),
+    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
     location: 'San Antonio, TX',
     distance: '48 mi',
     rating: 4.8,
@@ -117,7 +113,7 @@ export const vendors: Vendor[] = [
     name: 'Lone Star Timing',
     category: 'timing',
     categoryLabel: 'Timing Company',
-    photo: avatar('Lone Star'),
+    photo: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop',
     location: 'Dallas, TX',
     distance: '195 mi',
     rating: 4.9,
@@ -142,7 +138,7 @@ export const vendors: Vendor[] = [
     name: 'Gulf Coast Timing Solutions',
     category: 'timing',
     categoryLabel: 'Timing Company',
-    photo: avatar('Gulf Coast'),
+    photo: 'https://images.unsplash.com/photo-1461896836934-bd45ba8920c7?w=200&h=200&fit=crop',
     location: 'Houston, TX',
     distance: '165 mi',
     rating: 4.6,
@@ -166,7 +162,7 @@ export const vendors: Vendor[] = [
     name: 'TexasTime Athletics',
     category: 'timing',
     categoryLabel: 'Timing Company',
-    photo: avatar('TexasTime'),
+    photo: 'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=200&h=200&fit=crop',
     location: 'San Marcos, TX',
     distance: 'Local',
     rating: 4.5,
@@ -191,7 +187,7 @@ export const vendors: Vendor[] = [
     name: 'Sarah Mitchell Sports Photography',
     category: 'photographer',
     categoryLabel: 'Photographer',
-    photo: avatar('Sarah Mitchell'),
+    photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
     location: 'Austin, TX',
     distance: '32 mi',
     rating: 4.8,
@@ -216,7 +212,7 @@ export const vendors: Vendor[] = [
     name: 'FastFrame Athletics',
     category: 'photographer',
     categoryLabel: 'Photographer',
-    photo: avatar('FastFrame'),
+    photo: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=200&h=200&fit=crop',
     location: 'San Antonio, TX',
     distance: '48 mi',
     rating: 4.6,
@@ -240,7 +236,7 @@ export const vendors: Vendor[] = [
     name: 'TrackLens Media',
     category: 'photographer',
     categoryLabel: 'Photographer / Videographer',
-    photo: avatar('TrackLens'),
+    photo: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=200&h=200&fit=crop',
     location: 'Houston, TX',
     distance: '165 mi',
     rating: 4.9,

@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { vendors, type Vendor, type VendorCategory } from '../data/vendors'
 import { SlideUpPanel } from '../components/SlideUpPanel'
+import { Check, Search, SearchX } from 'lucide-react'
 
 const categories: { id: VendorCategory | 'all'; label: string }[] = [
   { id: 'all', label: 'All' },
@@ -16,21 +17,21 @@ function StarRating({ rating, size = 14 }: { rating: number; size?: number }) {
   return (
     <span className="inline-flex items-center gap-px" style={{ fontSize: size }}>
       {Array.from({ length: full }).map((_, i) => (
-        <span key={`f${i}`} className="text-amber-500">★</span>
+        <span key={`f${i}`} className="text-amber-500">&#9733;</span>
       ))}
       {partial > 0 && (
         <span className="relative text-sand-300">
-          ★
+          &#9733;
           <span
             className="absolute inset-0 overflow-hidden text-amber-500"
             style={{ width: `${partial * 100}%` }}
           >
-            ★
+            &#9733;
           </span>
         </span>
       )}
       {Array.from({ length: empty }).map((_, i) => (
-        <span key={`e${i}`} className="text-sand-300">★</span>
+        <span key={`e${i}`} className="text-sand-300">&#9733;</span>
       ))}
     </span>
   )
@@ -63,17 +64,17 @@ function CertPill({ text }: { text: string }) {
 function HiredBadge() {
   return (
     <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-success-light text-success">
-      Hired ✓
+      Hired <Check size={12} />
     </span>
   )
 }
 
-/* ─── Hired Team Card (compact horizontal) ─── */
+/* --- Hired Team Card (compact horizontal) --- */
 function HiredCard({ vendor, onTap }: { vendor: Vendor; onTap: () => void }) {
   return (
     <button
       onClick={onTap}
-      className="flex items-center gap-3 w-full bg-white border border-sand-200 rounded-xl p-3 text-left transition-all active:scale-[0.98]"
+      className="flex items-center gap-3 w-full bg-white border border-sand-200 rounded-lg p-3 text-left transition-all active:scale-[0.98]"
     >
       <img
         src={vendor.photo}
@@ -89,20 +90,20 @@ function HiredCard({ vendor, onTap }: { vendor: Vendor; onTap: () => void }) {
   )
 }
 
-/* ─── Vendor Card (Thumbtack-style) ─── */
+/* --- Vendor Card (Thumbtack-style) --- */
 function VendorCard({ vendor, onTap }: { vendor: Vendor; onTap: () => void }) {
   const visibleSpecialties = vendor.specialties.slice(0, 3)
 
   return (
     <button
       onClick={onTap}
-      className="flex gap-3 w-full bg-white border border-sand-200 rounded-xl p-3.5 text-left transition-all active:scale-[0.98] hover:border-sand-300"
+      className="flex gap-3 w-full bg-white border border-sand-200 rounded-lg p-3.5 text-left transition-all active:scale-[0.98] hover:border-sand-300"
     >
       {/* Avatar */}
       <img
         src={vendor.photo}
         alt={vendor.name}
-        className="w-14 h-14 rounded-xl object-cover flex-shrink-0 mt-0.5"
+        className="w-14 h-14 rounded-lg object-cover flex-shrink-0 mt-0.5"
       />
 
       {/* Content */}
@@ -117,7 +118,7 @@ function VendorCard({ vendor, onTap }: { vendor: Vendor; onTap: () => void }) {
         {/* Row 2: Rating + location */}
         <div className="flex items-center gap-2 mt-1 text-[13px] text-sand-600">
           <span className="flex items-center gap-0.5 text-sand-900 font-semibold">
-            <span className="text-amber-500">★</span> {vendor.rating}
+            <span className="text-amber-500">&#9733;</span> {vendor.rating}
           </span>
           <span className="text-sand-400">·</span>
           <span>{vendor.reviewCount} reviews</span>
@@ -165,7 +166,7 @@ function VendorCard({ vendor, onTap }: { vendor: Vendor; onTap: () => void }) {
   )
 }
 
-/* ─── Vendor Profile Panel ─── */
+/* --- Vendor Profile Panel --- */
 function VendorProfile({ vendor, onClose }: { vendor: Vendor; onClose: () => void }) {
   return (
     <SlideUpPanel open={true} onClose={onClose} fullHeight>
@@ -175,7 +176,7 @@ function VendorProfile({ vendor, onClose }: { vendor: Vendor; onClose: () => voi
           <img
             src={vendor.photo}
             alt={vendor.name}
-            className="w-20 h-20 rounded-2xl object-cover flex-shrink-0"
+            className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
           />
           <div className="flex-1 min-w-0">
             <h2 className="text-[20px] font-extrabold text-sand-950 leading-tight">{vendor.name}</h2>
@@ -193,8 +194,8 @@ function VendorProfile({ vendor, onClose }: { vendor: Vendor; onClose: () => voi
 
         {/* Hired badge */}
         {vendor.hired && (
-          <div className="mt-4 bg-success-light border border-green-200 rounded-xl p-3 flex items-center gap-2">
-            <span className="text-[18px]">✅</span>
+          <div className="mt-4 bg-success-light border border-green-200 rounded-lg p-3 flex items-center gap-2">
+            <Check size={18} className="text-success flex-shrink-0" />
             <div>
               <p className="text-[14px] font-bold text-success">Hired for this meet</p>
               <p className="text-[12px] text-green-700">Confirmed and ready for April 12</p>
@@ -203,7 +204,7 @@ function VendorProfile({ vendor, onClose }: { vendor: Vendor; onClose: () => voi
         )}
 
         {/* Rate */}
-        <div className="mt-5 bg-brick-50 rounded-xl p-4 text-center">
+        <div className="mt-5 bg-brick-50 rounded-lg p-4 text-center">
           <span className="text-[28px] font-extrabold text-brick-700">{vendor.rate}</span>
           <span className="text-[16px] text-brick-600 font-medium">{vendor.rateUnit}</span>
         </div>
@@ -248,12 +249,12 @@ function VendorProfile({ vendor, onClose }: { vendor: Vendor; onClose: () => voi
         <div className="mt-5">
           <h3 className="text-[14px] font-bold text-sand-900 uppercase tracking-wide mb-2">Availability</h3>
           {vendor.available ? (
-            <div className="flex items-center gap-2 bg-success-light rounded-lg p-3">
+            <div className="flex items-center gap-2 bg-success-light rounded-md p-3">
               <span className="w-2.5 h-2.5 rounded-full bg-success" />
               <span className="text-[14px] font-semibold text-success">Available for bookings</span>
             </div>
           ) : (
-            <div className="flex items-center gap-2 bg-sand-100 rounded-lg p-3">
+            <div className="flex items-center gap-2 bg-sand-100 rounded-md p-3">
               <span className="w-2.5 h-2.5 rounded-full bg-sand-400" />
               <span className="text-[14px] font-medium text-sand-600">
                 {vendor.availableDates || 'Currently unavailable'}
@@ -269,7 +270,7 @@ function VendorProfile({ vendor, onClose }: { vendor: Vendor; onClose: () => voi
           </h3>
           <div className="space-y-3">
             {vendor.reviews.map((review, i) => (
-              <div key={i} className="bg-sand-50 rounded-xl p-3.5 border border-sand-100">
+              <div key={i} className="bg-sand-50 rounded-lg p-3.5 border border-sand-100">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[13px] font-bold text-sand-900">{review.author}</span>
                   <span className="text-[12px] text-sand-500">{review.date}</span>
@@ -283,10 +284,10 @@ function VendorProfile({ vendor, onClose }: { vendor: Vendor; onClose: () => voi
 
         {/* Action buttons */}
         <div className="mt-6 flex gap-3">
-          <button className="flex-1 py-3.5 rounded-xl border-2 border-brick-700 text-brick-700 font-bold text-[15px] transition-all active:scale-[0.97]">
+          <button className="flex-1 py-3.5 rounded-lg border-2 border-brick-700 text-brick-700 font-bold text-[15px] transition-all active:scale-[0.97]">
             Contact
           </button>
-          <button className="flex-1 py-3.5 rounded-xl bg-brick-700 text-white font-bold text-[15px] transition-all active:scale-[0.97]">
+          <button className="flex-1 py-3.5 rounded-lg bg-brick-700 text-white font-bold text-[15px] transition-all active:scale-[0.97]">
             Book Now
           </button>
         </div>
@@ -297,16 +298,14 @@ function VendorProfile({ vendor, onClose }: { vendor: Vendor; onClose: () => voi
 
 function StatBox({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-sand-50 rounded-xl p-3 text-center border border-sand-100">
+    <div className="bg-sand-50 rounded-lg p-3 text-center border border-sand-100">
       <p className="text-[12px] text-sand-500 font-medium uppercase tracking-wide">{label}</p>
       <p className="text-[15px] font-bold text-sand-900 mt-0.5">{value}</p>
     </div>
   )
 }
 
-/* ═══════════════════════════════════════════
-   Main Export
-   ═══════════════════════════════════════════ */
+/* ===== Main Export ===== */
 
 export function VendorView() {
   const [activeCategory, setActiveCategory] = useState<VendorCategory | 'all'>('all')
@@ -378,18 +377,18 @@ export function VendorView() {
       <div className="px-4 pb-4">
         <div className="flex items-center gap-2">
           <div className="flex-1 relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sand-400 text-[16px] pointer-events-none">
-              🔍
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sand-400 pointer-events-none">
+              <Search size={16} />
             </span>
             <input
               type="text"
               placeholder="Search vendors, specialties..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-sand-50 border border-sand-200 text-[14px] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-brick-400 focus:ring-2 focus:ring-brick-100 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-sand-50 border border-sand-200 text-[14px] text-sand-900 placeholder:text-sand-400 focus:outline-none focus:border-brick-400 focus:ring-2 focus:ring-brick-100 transition-all"
             />
           </div>
-          <button className="flex-shrink-0 w-10 h-10 rounded-xl bg-sand-100 border border-sand-200 flex items-center justify-center text-sand-600 transition-all active:scale-95">
+          <button className="flex-shrink-0 w-10 h-10 rounded-lg bg-sand-100 border border-sand-200 flex items-center justify-center text-sand-600 transition-all active:scale-95">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="4" y1="6" x2="20" y2="6" />
               <line x1="8" y1="12" x2="20" y2="12" />
@@ -434,7 +433,9 @@ export function VendorView() {
           ))
         ) : (
           <div className="py-12 text-center">
-            <p className="text-[32px] mb-2">🔍</p>
+            <div className="flex justify-center mb-2">
+              <SearchX size={32} className="text-sand-400" />
+            </div>
             <p className="text-[16px] font-bold text-sand-700">No vendors found</p>
             <p className="text-[14px] text-sand-500 mt-1">Try adjusting your search or filters</p>
           </div>

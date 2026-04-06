@@ -2,6 +2,19 @@ import { useState } from 'react'
 import { volunteers } from '../data/staff'
 import { events, meet } from '../data/meet'
 import { WeatherBanner } from '../components/WeatherBanner'
+import {
+  CheckCircle2,
+  Check,
+  Clock,
+  Target,
+  Gavel,
+  Heart,
+  RefreshCw,
+  AlertTriangle,
+  Zap,
+  Building,
+  Cross,
+} from 'lucide-react'
 
 interface TaskItem {
   id: string
@@ -62,7 +75,7 @@ export function VolunteerView() {
       {/* Header */}
       <div className="px-5 pt-6 pb-4">
         <h1 className="text-[28px] font-extrabold text-sand-950 tracking-tight leading-tight">
-          Hi, Rachel 👋
+          Hi, Rachel
         </h1>
         <div className="flex items-center gap-2 mt-2">
           <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-brick-50 text-brick-700 text-[13px] font-semibold">
@@ -78,7 +91,7 @@ export function VolunteerView() {
           </span>
         </div>
         <div className="flex items-center gap-1.5 mt-2 text-[14px] text-success font-medium">
-          <span>✅</span>
+          <CheckCircle2 size={16} className="text-success" />
           <span>Checked in at {rachel.checkedInTime}</span>
         </div>
       </div>
@@ -87,7 +100,7 @@ export function VolunteerView() {
       {hasWeatherAlert && (
         <div>
           <WeatherBanner />
-          <div className="mx-4 -mt-1 mb-4 bg-amber-50 border border-amber-200 border-t-0 rounded-b-xl px-4 py-3">
+          <div className="mx-4 -mt-1 mb-4 bg-amber-50 border border-amber-200 border-t-0 rounded-b-lg px-4 py-3">
             <p className="text-[14px] text-sand-800 leading-relaxed font-medium">
               <span className="font-bold text-warning">Your action during weather delays:</span>{' '}
               Secure loose equipment, direct athletes to shelter, then proceed to designated shelter area (main building).
@@ -98,14 +111,14 @@ export function VolunteerView() {
 
       {/* Your Assignment Card */}
       <div className="mx-4 mb-4">
-        <div className="bg-white border border-sand-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="bg-white border border-sand-200 rounded-lg overflow-hidden shadow-sm">
           <div className="bg-brick-700 px-4 py-3">
             <h2 className="text-[15px] font-bold text-white uppercase tracking-wider">Your Assignment</h2>
           </div>
           <div className="p-4 space-y-4">
             {/* Location */}
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-brick-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="w-9 h-9 rounded-lg bg-brick-50 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg className="w-5 h-5 text-brick-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -119,7 +132,7 @@ export function VolunteerView() {
 
             {/* Role description */}
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-brick-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="w-9 h-9 rounded-lg bg-brick-50 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg className="w-5 h-5 text-brick-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
@@ -134,7 +147,7 @@ export function VolunteerView() {
 
             {/* Supervisor */}
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-brick-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="w-9 h-9 rounded-lg bg-brick-50 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg className="w-5 h-5 text-brick-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -148,7 +161,7 @@ export function VolunteerView() {
 
             {/* Radio channel */}
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-brick-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <div className="w-9 h-9 rounded-lg bg-brick-50 flex items-center justify-center flex-shrink-0 mt-0.5">
                 <svg className="w-5 h-5 text-brick-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0" />
                 </svg>
@@ -160,7 +173,7 @@ export function VolunteerView() {
             </div>
 
             {/* View on Map button */}
-            <button className="w-full mt-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-brick-50 border border-brick-200 text-brick-700 font-semibold text-[15px] active:bg-brick-100 transition-colors">
+            <button className="w-full mt-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-brick-50 border border-brick-200 text-brick-700 font-semibold text-[15px] active:bg-brick-100 transition-colors">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
@@ -177,14 +190,14 @@ export function VolunteerView() {
         </h2>
         <div className="space-y-2.5">
           {/* Girls Long Jump — Completed */}
-          <div className="bg-success-light border border-green-200 rounded-xl px-4 py-3">
+          <div className="bg-success-light border border-green-200 rounded-lg px-4 py-3">
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-[16px] font-bold text-sand-950">{girlsLJ.name}</div>
                 <div className="text-[13px] text-sand-600 mt-0.5">Scheduled: {girlsLJ.time}</div>
               </div>
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/70 text-success text-[12px] font-bold uppercase tracking-wider">
-                <span>✓</span> Done
+                <Check size={14} /> Done
               </span>
             </div>
             {girlsLJ.results && (
@@ -194,7 +207,7 @@ export function VolunteerView() {
                   <div key={r.place} className="flex items-center gap-2 text-[13px] text-sand-700 py-0.5">
                     <span className="w-5 text-center font-bold text-sand-500">{r.place}.</span>
                     <span className="font-medium">{r.athlete}</span>
-                    <span className="text-sand-400">—</span>
+                    <span className="text-sand-400">--</span>
                     <span>{r.mark}</span>
                   </div>
                 ))}
@@ -203,7 +216,7 @@ export function VolunteerView() {
           </div>
 
           {/* Boys Triple Jump — Delayed */}
-          <div className="bg-warning-light border border-amber-200 rounded-xl px-4 py-3">
+          <div className="bg-warning-light border border-amber-200 rounded-lg px-4 py-3">
             <div className="flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-2">
@@ -218,7 +231,7 @@ export function VolunteerView() {
                 )}
               </div>
               <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white/70 flex items-center justify-center">
-                <span className="text-xl">⏳</span>
+                <Clock size={20} className="text-warning" />
               </div>
             </div>
           </div>
@@ -246,7 +259,7 @@ export function VolunteerView() {
           </div>
         </div>
 
-        <div className="bg-white border border-sand-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="bg-white border border-sand-200 rounded-lg overflow-hidden shadow-sm">
           {tasks.map((task, i) => (
             <button
               key={task.id}
@@ -259,7 +272,7 @@ export function VolunteerView() {
               {/* Checkbox */}
               <div
                 className={`
-                  w-7 h-7 rounded-lg flex-shrink-0 flex items-center justify-center mt-0.5 transition-colors
+                  w-7 h-7 rounded-md flex-shrink-0 flex items-center justify-center mt-0.5 transition-colors
                   ${task.completed
                     ? 'bg-success text-white'
                     : 'border-2 border-sand-300 bg-white'
@@ -299,18 +312,18 @@ export function VolunteerView() {
         <h2 className="text-[13px] font-bold text-sand-500 uppercase tracking-wider mb-2.5 px-1">
           Key Contacts
         </h2>
-        <div className="bg-white border border-sand-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="bg-white border border-sand-200 rounded-lg overflow-hidden shadow-sm">
           {[
-            { title: 'Meet Director', name: 'Coach Rivera', phone: '(512) 555-0101', icon: '🎯' },
-            { title: 'Head Field Judge', name: 'Patricia Wong', phone: '(512) 555-0105', icon: '👩‍⚖️' },
-            { title: 'Medical', name: 'Dr. Sarah Kim', phone: '(512) 555-0106', icon: '🏥' },
-            { title: 'Your Shift Replacement', name: 'Sarah Lopez', phone: '(512) 555-1007', icon: '🔄', note: 'Arrives 11:30 AM' },
+            { title: 'Meet Director', name: 'Coach Rivera', phone: '(512) 555-0101', icon: <Target size={18} className="text-sand-600" /> },
+            { title: 'Head Field Judge', name: 'Patricia Wong', phone: '(512) 555-0105', icon: <Gavel size={18} className="text-sand-600" /> },
+            { title: 'Medical', name: 'Dr. Sarah Kim', phone: '(512) 555-0106', icon: <Heart size={18} className="text-sand-600" /> },
+            { title: 'Your Shift Replacement', name: 'Sarah Lopez', phone: '(512) 555-1007', icon: <RefreshCw size={18} className="text-sand-600" />, note: 'Arrives 11:30 AM' },
           ].map((contact, i, arr) => (
             <div
               key={contact.phone}
               className={`flex items-center gap-3 px-4 py-3 ${i < arr.length - 1 ? 'border-b border-sand-100' : ''}`}
             >
-              <div className="w-9 h-9 rounded-xl bg-sand-100 flex items-center justify-center flex-shrink-0 text-lg">
+              <div className="w-9 h-9 rounded-lg bg-sand-100 flex items-center justify-center flex-shrink-0">
                 {contact.icon}
               </div>
               <div className="flex-1 min-w-0">
@@ -323,7 +336,7 @@ export function VolunteerView() {
               <a
                 href={`tel:${contact.phone.replace(/\D/g, '')}`}
                 onClick={e => e.stopPropagation()}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-brick-50 text-brick-700 font-semibold text-[13px] active:bg-brick-100 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-brick-50 text-brick-700 font-semibold text-[13px] active:bg-brick-100 transition-colors"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -339,24 +352,28 @@ export function VolunteerView() {
       <div className="mx-4 mb-6">
         <button
           onClick={() => setEmergencyOpen(!emergencyOpen)}
-          className="w-full bg-danger-light border border-red-200 rounded-2xl px-4 py-3.5 text-left transition-all"
+          className="w-full bg-danger-light border border-red-200 rounded-lg px-4 py-3.5 text-left transition-all"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <span className="text-xl">🚨</span>
+              <AlertTriangle size={18} className="text-danger" />
               <span className="text-[15px] font-bold text-danger">Emergency Information</span>
             </div>
             <div className={`text-sand-400 transition-transform duration-200 ${emergencyOpen ? 'rotate-180' : ''}`}>
-              ▾
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
             </div>
           </div>
         </button>
 
         {emergencyOpen && (
-          <div className="bg-white border border-red-200 border-t-0 rounded-b-2xl -mt-3 pt-5 px-4 pb-4 space-y-4">
+          <div className="bg-white border border-red-200 border-t-0 rounded-b-lg -mt-3 pt-5 px-4 pb-4 space-y-4">
             {/* Lightning protocol */}
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-warning-light flex items-center justify-center flex-shrink-0 text-base">⚡</div>
+              <div className="w-8 h-8 rounded-md bg-warning-light flex items-center justify-center flex-shrink-0">
+                <Zap size={16} className="text-warning" />
+              </div>
               <div>
                 <div className="text-[14px] font-bold text-sand-950">Lightning Protocol</div>
                 <div className="text-[14px] text-sand-700 leading-relaxed mt-0.5">
@@ -367,7 +384,9 @@ export function VolunteerView() {
 
             {/* Medical emergency */}
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-danger-light flex items-center justify-center flex-shrink-0 text-base">🏥</div>
+              <div className="w-8 h-8 rounded-md bg-danger-light flex items-center justify-center flex-shrink-0">
+                <Cross size={16} className="text-danger" />
+              </div>
               <div>
                 <div className="text-[14px] font-bold text-sand-950">Medical Emergency</div>
                 <div className="text-[14px] text-sand-700 leading-relaxed mt-0.5">
@@ -378,7 +397,9 @@ export function VolunteerView() {
 
             {/* AED location */}
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-info-light flex items-center justify-center flex-shrink-0 text-base">💓</div>
+              <div className="w-8 h-8 rounded-md bg-info-light flex items-center justify-center flex-shrink-0">
+                <Heart size={16} className="text-info" />
+              </div>
               <div>
                 <div className="text-[14px] font-bold text-sand-950">AED Location</div>
                 <div className="text-[14px] text-sand-700 leading-relaxed mt-0.5">
@@ -389,7 +410,9 @@ export function VolunteerView() {
 
             {/* Nearest shelter */}
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-success-light flex items-center justify-center flex-shrink-0 text-base">🏛️</div>
+              <div className="w-8 h-8 rounded-md bg-success-light flex items-center justify-center flex-shrink-0">
+                <Building size={16} className="text-success" />
+              </div>
               <div>
                 <div className="text-[14px] font-bold text-sand-950">Nearest Shelter</div>
                 <div className="text-[14px] text-sand-700 leading-relaxed mt-0.5">

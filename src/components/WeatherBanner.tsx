@@ -1,5 +1,13 @@
 import { useState } from 'react'
+import { Zap, Thermometer, Wind, CloudRain, ChevronDown } from 'lucide-react'
 import { meet } from '../data/meet'
+
+const iconMap = {
+  lightning: <Zap size={20} />,
+  heat: <Thermometer size={20} />,
+  wind: <Wind size={20} />,
+  rain: <CloudRain size={20} />,
+}
 
 export function WeatherBanner() {
   const [expanded, setExpanded] = useState(false)
@@ -7,24 +15,16 @@ export function WeatherBanner() {
 
   if (!alert) return null
 
-  const iconMap = {
-    lightning: '⚡',
-    heat: '🌡️',
-    wind: '💨',
-    rain: '🌧️',
-  }
-
-  // Calculate countdown
   const estimatedResume = alert.estimatedResume || 'TBD'
 
   return (
     <div className="mx-4 mb-3">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full bg-gradient-to-r from-amber-50 to-red-50 border border-amber-200 rounded-2xl p-4 text-left transition-all"
+        className="w-full bg-gradient-to-r from-amber-50 to-red-50 border border-amber-200 rounded-lg p-4 text-left transition-all"
       >
         <div className="flex items-start gap-3">
-          <div className="text-2xl flex-shrink-0 mt-0.5">{iconMap[alert.type]}</div>
+          <div className="flex-shrink-0 mt-0.5 text-amber-600">{iconMap[alert.type]}</div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <span className="text-[13px] font-bold text-danger uppercase tracking-wider">Weather Hold</span>
@@ -39,7 +39,7 @@ export function WeatherBanner() {
             </div>
           </div>
           <div className={`text-sand-400 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}>
-            ▾
+            <ChevronDown size={16} />
           </div>
         </div>
 
