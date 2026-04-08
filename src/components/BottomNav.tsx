@@ -15,7 +15,7 @@ interface BottomNavProps {
 
 export function BottomNav({ items, activeId, onSelect }: BottomNavProps) {
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white/95 backdrop-blur-lg border-t border-sand-200 z-50"
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white/95 backdrop-blur-lg border-t border-sand-100 z-50 shadow-[0_-2px_20px_rgba(0,0,0,0.04)]"
       style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 8px)' }}>
       <div className="flex items-center justify-around px-2 pt-2">
         {items.map((item) => {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Trophy, Timer, Target, MapPin } from 'lucide-react'
 import { meet, events, followedAthlete, type MeetEvent } from '../data/meet'
 import { notifications } from '../data/mapPins'
 import { WeatherBanner } from '../components/WeatherBanner'
@@ -24,8 +24,8 @@ function CompletedCard({ event }: { event: MeetEvent }) {
   const pr = followedAthlete.prs[eventId as keyof typeof followedAthlete.prs]
 
   return (
-    <div className="bg-white rounded-lg border border-sand-200 p-4">
-      <div className="flex items-center justify-between mb-1">
+    <div className="bg-white rounded-xl border border-sand-200 p-4 shadow-sm">
+      <div className="flex items-center justify-between mb-1.5">
         <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-success uppercase tracking-wide">
           <span className="w-2 h-2 rounded-full bg-success inline-block" />
           Completed
@@ -58,8 +58,8 @@ function CompletedCard({ event }: { event: MeetEvent }) {
 
 function DelayedCard({ event }: { event: MeetEvent }) {
   return (
-    <div className="bg-amber-50/50 rounded-lg border border-amber-200 p-4">
-      <div className="flex items-center justify-between mb-1">
+    <div className="bg-amber-50/50 rounded-xl border border-amber-200 p-4 shadow-sm">
+      <div className="flex items-center justify-between mb-1.5">
         <span className="text-[13px] font-semibold text-warning uppercase tracking-wide">
           Delayed
         </span>
@@ -78,7 +78,7 @@ function DelayedCard({ event }: { event: MeetEvent }) {
       <p className="text-[15px] text-sand-700 mt-1.5">
         {event.notes || 'Weather delay'}
       </p>
-      <div className="flex items-center gap-2 mt-3 bg-white/60 rounded-md px-3 py-2">
+      <div className="flex items-center gap-2 mt-3 bg-white/60 rounded-lg px-3 py-2.5">
         <div className="w-2 h-2 rounded-full bg-warning animate-pulse flex-shrink-0" />
         <span className="text-[14px] text-sand-700">
           We'll notify you 10 min before Emma's event starts
@@ -93,8 +93,8 @@ function UpcomingCard({ event }: { event: MeetEvent }) {
   const pr = followedAthlete.prs[eventId as keyof typeof followedAthlete.prs]
 
   return (
-    <div className="bg-white rounded-lg border border-sand-200 p-4">
-      <div className="flex items-center justify-between mb-1">
+    <div className="bg-white rounded-xl border border-sand-200 p-4 shadow-sm">
+      <div className="flex items-center justify-between mb-1.5">
         <span className="text-[13px] font-semibold text-sand-500 uppercase tracking-wide">
           Coming Up
         </span>
@@ -120,9 +120,9 @@ function NotificationItem({ notification }: { notification: typeof notifications
   }
 
   return (
-    <div className={`rounded-lg border p-3.5 ${bgMap[notification.type]} relative`}>
+    <div className={`rounded-xl border p-4 ${bgMap[notification.type]} relative shadow-sm`}>
       {!notification.read && (
-        <div className="absolute top-3.5 right-3.5 w-2.5 h-2.5 rounded-full bg-info" />
+        <div className="absolute top-4 right-4 w-2.5 h-2.5 rounded-full bg-info" />
       )}
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0 pr-3">
@@ -142,12 +142,10 @@ function NotificationItem({ notification }: { notification: typeof notifications
 export function ParentView() {
   const [meetInfoOpen, setMeetInfoOpen] = useState(false)
 
-  // Get Emma's events in chronological order
   const emmaEvents = followedAthlete.events
     .map((id) => events.find((e) => e.id === id))
     .filter((e): e is MeetEvent => e !== undefined)
 
-  // Sort: completed first (by time), then delayed, then upcoming
   const statusOrder: Record<string, number> = {
     completed: 0,
     'in-progress': 1,
@@ -159,7 +157,7 @@ export function ParentView() {
     const aOrder = statusOrder[a.status] ?? 3
     const bOrder = statusOrder[b.status] ?? 3
     if (aOrder !== bOrder) return aOrder - bOrder
-    return 0 // preserve original order within same status
+    return 0
   })
 
   const completedCount = emmaEvents.filter((e) => e.status === 'completed').length
@@ -167,77 +165,96 @@ export function ParentView() {
 
   return (
     <div className="min-h-dvh bg-sand-50 pb-8">
-      {/* Header */}
-      <div className="bg-white border-b border-sand-200">
-        <div className="px-5 pt-6 pb-5">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="text-[13px] font-semibold text-brick-600 uppercase tracking-wider mb-1">
-                Following
-              </p>
-              <h1 className="text-[26px] font-extrabold text-sand-950 leading-none">
-                {followedAthlete.name}
-              </h1>
-              <div className="flex items-center gap-2.5 mt-2">
-                <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-brick-50 text-brick-700 text-[13px] font-bold border border-brick-200">
-                  {followedAthlete.team}
-                </span>
-                <span className="text-[14px] text-sand-500">
-                  Grade {followedAthlete.grade}
-                </span>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-[13px] text-sand-500 font-medium">
-                {completedCount}/{totalCount} events done
-              </p>
+      {/* ─── Full-Bleed Gradient Header ─── */}
+      <div className="bg-gradient-to-b from-brick-700 via-brick-600 to-sand-50 pt-5 pb-14 px-5">
+        <p className="text-[12px] font-semibold text-white/60 uppercase tracking-widest mb-1">
+          Following
+        </p>
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-[28px] font-extrabold text-white leading-none">
+              {followedAthlete.name}
+            </h1>
+            <div className="flex items-center gap-2.5 mt-2.5">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-white/15 text-white text-[13px] font-bold backdrop-blur-sm">
+                {followedAthlete.team}
+              </span>
+              <span className="text-[14px] text-white/70">
+                Grade {followedAthlete.grade}
+              </span>
             </div>
           </div>
-
-          {/* PR / Season Best Mini Table */}
-          <div className="mt-4 bg-sand-50 rounded-lg border border-sand-200 overflow-hidden">
-            <div className="grid grid-cols-4 text-[11px] font-bold text-sand-500 uppercase tracking-wider px-3 py-2 border-b border-sand-200 bg-sand-100">
-              <span>Event</span>
-              <span className="text-center">PR</span>
-              <span className="text-center">SB</span>
-              <span className="text-right">Today</span>
+          <div className="text-right mt-1">
+            <div className="bg-white/15 backdrop-blur-sm rounded-xl px-3 py-2">
+              <p className="text-[20px] font-extrabold text-white leading-none">
+                {completedCount}/{totalCount}
+              </p>
+              <p className="text-[11px] text-white/70 font-medium mt-0.5">events done</p>
             </div>
-            {followedAthlete.events.map((eventId) => {
-              const event = events.find((e) => e.id === eventId)
-              const result = event ? getEmmaResult(event) : null
-              const pr = followedAthlete.prs[eventId as keyof typeof followedAthlete.prs]
-              const sb = followedAthlete.seasonBests[eventId as keyof typeof followedAthlete.seasonBests]
-              return (
-                <div
-                  key={eventId}
-                  className="grid grid-cols-4 items-center px-3 py-2 border-b border-sand-100 last:border-0"
-                >
-                  <span className="text-[14px] font-semibold text-sand-950">
-                    {getEventName(eventId)}
-                  </span>
-                  <span className="text-[14px] text-sand-600 text-center">{pr}</span>
-                  <span className="text-[14px] text-sand-600 text-center">{sb}</span>
-                  <span className="text-[14px] font-bold text-right">
-                    {result ? (
-                      <span className="text-success">{result.mark}</span>
-                    ) : (
-                      <span className="text-sand-400">--</span>
-                    )}
-                  </span>
-                </div>
-              )
-            })}
           </div>
         </div>
       </div>
 
+      {/* ─── PR / SB Table (overlapping header) ─── */}
+      <div className="mx-5 -mt-8 relative z-10">
+        <div className="bg-white rounded-xl border border-sand-200 overflow-hidden shadow-md">
+          <div className="grid grid-cols-4 text-[11px] font-bold text-sand-500 uppercase tracking-wider px-3.5 py-2.5 border-b border-sand-200 bg-sand-50">
+            <span>Event</span>
+            <span className="text-center">PR</span>
+            <span className="text-center">SB</span>
+            <span className="text-right">Today</span>
+          </div>
+          {followedAthlete.events.map((eventId) => {
+            const event = events.find((e) => e.id === eventId)
+            const result = event ? getEmmaResult(event) : null
+            const pr = followedAthlete.prs[eventId as keyof typeof followedAthlete.prs]
+            const sb = followedAthlete.seasonBests[eventId as keyof typeof followedAthlete.seasonBests]
+            return (
+              <div
+                key={eventId}
+                className="grid grid-cols-4 items-center px-3.5 py-2.5 border-b border-sand-100 last:border-0"
+              >
+                <span className="text-[15px] font-semibold text-sand-950">
+                  {getEventName(eventId)}
+                </span>
+                <span className="text-[14px] text-sand-600 text-center">{pr}</span>
+                <span className="text-[14px] text-sand-600 text-center">{sb}</span>
+                <span className="text-[15px] font-bold text-right">
+                  {result ? (
+                    <span className="text-success">{result.mark}</span>
+                  ) : (
+                    <span className="text-sand-400">--</span>
+                  )}
+                </span>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* ─── Stat Pills ─── */}
+      <div className="flex gap-2 px-5 mt-4">
+        <div className="flex items-center gap-1.5 bg-brick-50 border border-brick-100 rounded-full px-3 py-1.5">
+          <Trophy size={13} className="text-brick-600" />
+          <span className="text-[12px] font-bold text-sand-900">{completedCount} Finishes</span>
+        </div>
+        <div className="flex items-center gap-1.5 bg-brick-50 border border-brick-100 rounded-full px-3 py-1.5">
+          <Timer size={13} className="text-brick-600" />
+          <span className="text-[12px] font-bold text-sand-900">{totalCount - completedCount} Remaining</span>
+        </div>
+        <div className="flex items-center gap-1.5 bg-brick-50 border border-brick-100 rounded-full px-3 py-1.5">
+          <Target size={13} className="text-brick-600" />
+          <span className="text-[12px] font-bold text-sand-900">{totalCount} Events</span>
+        </div>
+      </div>
+
       {/* Weather Alert */}
-      <div className="mt-3">
+      <div className="mt-4">
         <WeatherBanner />
       </div>
 
       {/* Emma's Schedule */}
-      <div className="px-4 mt-3">
+      <div className="px-5 mt-4">
         <h2 className="text-[18px] font-bold text-sand-950 mb-3">
           Emma's Schedule
         </h2>
@@ -258,11 +275,11 @@ export function ParentView() {
       </div>
 
       {/* Notifications Feed */}
-      <div className="px-4 mt-8">
+      <div className="px-5 mt-8">
         <h2 className="text-[18px] font-bold text-sand-950 mb-3">
           Notifications
         </h2>
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-col gap-3">
           {notifications.map((n) => (
             <NotificationItem key={n.id} notification={n} />
           ))}
@@ -270,10 +287,10 @@ export function ParentView() {
       </div>
 
       {/* Meet Info (Collapsible) */}
-      <div className="px-4 mt-8">
+      <div className="px-5 mt-8">
         <button
           onClick={() => setMeetInfoOpen(!meetInfoOpen)}
-          className="w-full bg-white rounded-lg border border-sand-200 p-4 text-left transition-all active:scale-[0.98]"
+          className="w-full bg-white rounded-xl border border-sand-200 p-4 text-left transition-all active:scale-[0.98] shadow-sm"
         >
           <div className="flex items-center justify-between">
             <h2 className="text-[18px] font-bold text-sand-950">Meet Info</h2>
@@ -314,7 +331,7 @@ export function ParentView() {
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-3">
-                <div className="bg-sand-50 rounded-md p-2.5">
+                <div className="bg-sand-50 rounded-lg p-2.5">
                   <p className="text-[11px] font-bold text-sand-500 uppercase tracking-wider">
                     Gates
                   </p>
@@ -322,7 +339,7 @@ export function ParentView() {
                     {meet.gatesOpen}
                   </p>
                 </div>
-                <div className="bg-sand-50 rounded-md p-2.5">
+                <div className="bg-sand-50 rounded-lg p-2.5">
                   <p className="text-[11px] font-bold text-sand-500 uppercase tracking-wider">
                     First Event
                   </p>
@@ -330,7 +347,7 @@ export function ParentView() {
                     {meet.firstEvent}
                   </p>
                 </div>
-                <div className="bg-sand-50 rounded-md p-2.5">
+                <div className="bg-sand-50 rounded-lg p-2.5">
                   <p className="text-[11px] font-bold text-sand-500 uppercase tracking-wider">
                     Last Event
                   </p>
@@ -339,7 +356,8 @@ export function ParentView() {
                   </p>
                 </div>
               </div>
-              <button className="w-full mt-2 py-3 rounded-lg bg-brick-700 text-white text-[15px] font-bold active:bg-brick-800 transition-colors">
+              <button className="w-full mt-2 py-3 rounded-xl bg-brick-700 text-white text-[15px] font-bold active:bg-brick-800 transition-colors flex items-center justify-center gap-2">
+                <MapPin size={16} />
                 View Venue Map
               </button>
             </div>

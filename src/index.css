@@ -84,6 +84,25 @@ body {
   line-height: 1.5 !important;
 }
 
+/* ─── Animations ──────────────────────────── */
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ─── Scrollbar ──────────────────────────── */
+
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -94,3 +113,6 @@ body {
   background: var(--color-sand-300);
   border-radius: 4px;
 }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
