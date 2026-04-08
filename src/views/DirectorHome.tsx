@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronDown, Users, Timer, CalendarCheck, AlertCircle, Zap } from 'lucide-react'
+import { ChevronDown, Users, CalendarCheck, AlertCircle } from 'lucide-react'
 import { meet, events, type MeetEvent } from '../data/meet'
 import { staff, volunteers, type StaffMember, type Volunteer } from '../data/staff'
 import { checklist, type ChecklistItem, type ChecklistPhase } from '../data/checklist'
